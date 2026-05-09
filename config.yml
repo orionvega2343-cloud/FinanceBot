@@ -1,0 +1,6 @@
+db:
+  port: 5432
+  name: finance
+  user: postgres
+  host: localhost
+  ssl_mode: disable
