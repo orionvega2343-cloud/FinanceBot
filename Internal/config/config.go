@@ -31,5 +31,5 @@ func MustLoad() *Config {
 	if err != nil {
 		log.Fatal("Error loading config.yml")
 	}
-	return c
+	return &c
 }
