@@ -1,0 +1,6 @@
+CREATE  TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    tg_id BIGINT UNIQUE NOT NULL,
+    username TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
