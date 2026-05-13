@@ -33,7 +33,7 @@ func (u *CategoryRepo) GetById(id int) (*models.Category, error) {
 
 func (u *CategoryRepo) GetByUserId(id int) ([]models.Category, error) {
 	var categories []models.Category
-	res, err := u.db.Query("SELECT id,name,user_id,is_default FROM categories WHERE user_id=$1", id)
+	res, err := u.db.Query("SELECT id,name,user_id,is_default 	FROM categories WHERE user_id=$1", id)
 	if err != nil {
 		return nil, err
 	}

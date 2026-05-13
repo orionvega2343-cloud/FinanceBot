@@ -14,7 +14,7 @@ func NewLimitRepo(db *sqlx.DB) *LimitRepo {
 	return &LimitRepo{db: db}
 }
 
-func (l *LimitRepo) CreateLimit(limit *models.Limit) error {
+func (l *LimitRepo) CreateLimitRepo(limit *models.Limit) error {
 	_, err := l.db.Exec(`INSERT INTO limits (user_id,category_id,amount) VALUES($1,$2,$3)`, limit.UserId, limit.CategoryID, limit.Amount)
 	if err != nil {
 		return err

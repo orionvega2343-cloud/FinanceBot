@@ -2,6 +2,7 @@ package repository
 
 import (
 	"LangBot/Internal/models"
+	"time"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -56,4 +57,23 @@ func (t *TransactionRepo) Delete(id int) error {
 		return err
 	}
 	return nil
+}
+
+func (l *TransactionRepo) GetByCategoryAndMonth(categoryID int, from time.Time, to time.Time) ([]models.Transaction, error) {
+	var transactions []models.Transaction
+	rows, err := l.db.Query(`SELECT  id,user_id,category_id,sum FROM transactions WHERE category_id=$1 AND type='expense' AND created_at BETWEEN $2 AND $3
+`, categoryID, from, to)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var tx models.Transaction
+		err = rows.Scan(&tx.Id, &tx.UserId, &tx.CategoryId, &tx.Sum)
+		transactions = append(transactions, tx)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return transactions, nil
 }
