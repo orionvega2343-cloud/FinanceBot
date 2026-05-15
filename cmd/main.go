@@ -24,8 +24,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	b.Handle("/start", func(c tele.Context) error {
-		return c.Send("Привет я бот, трекер расходов, я помогаю подсчитывать ваши расходы на разные категории ")
-	})
+
 	b.Start()
 }
